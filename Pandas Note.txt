@@ -1,0 +1,168 @@
+df.columns
+
+df.index
+
+df.info()
+
+df.describe()
+
+df.describe().transpose()
+
+df["total_bill"]
+
+type(df["total_bill"])
+
+mycols = ["total_bill","tip"]
+df[mycols]
+
+df[['total_bill','tip']]
+
+df['tip'] + df['total_bill']
+
+df['tip_percentage'] = 100 * df['tip'] / df['total_bill']
+
+df['price_per_person'] = np.round(df['total_bill']/df['size'],2)
+
+df.drop('tip_percentage',axis=1)  #drop column
+
+df.drop("Sun2959", axis=0, inplace=True) #drop row
+
+df.drop('tip_percentage',axis=1,inplace=True) 
+
+df.shape
+
+df.set_index("Payment ID")
+
+df = df.reset_index()
+
+df['total_bill'][0] == 16.98
+
+df['total_bill'] > 16.98
+
+df[df['total_bill'] > 40]
+
+df[df['sex'] == 'Male']
+
+df[(df['total_bill']>30) & (df['sex'] == 'Male')]
+
+options = ['Sat','Sun']
+df['day'].isin(options)
+
+options = ['Sat','Sun']
+df[df['day'].isin(options)]
+
+df['total_bill'].mean()
+
+def yelp(price):
+    if price < 0:
+        return '$'
+    elif price >= 10 and price < 30:
+        return '$$'
+    else:
+        return '$$$'
+
+df['yelp'] = df['total_bill'].apply(yelp)
+
+df.sort_values('tip')
+
+df.sort_values('tip', ascending=False)
+
+df.sort_values(['tip', 'size'])
+
+df['total_bill'].idxmax() # Row location
+
+df['total_bill'].min()
+
+df.iloc[df['total_bill'].idxmax]
+
+df.corr()
+
+df['sex'].value_counts()
+
+df['day'].unique()
+
+df['day'].nunique(),  len(df['day'].unique())
+
+df['sex'].replace('Female','F')
+
+df['sex'].replace(['Female','Male'],['F','M'])
+
+mymap = {'Female':'F','Male':'M'}
+df['sex'].map(mymap)
+
+df.duplicated()
+
+simple_df.drop_duplicates()
+
+df['total_bill'].between(10,20,inclusive=True)
+
+df[df['total_bill'].between(10,20,inclusive=True)]
+
+df.nlargest(10,'tip') # Ten values randomly
+
+df.sort_values('tip',ascending=False).iloc[0:2] #The first two smallest value
+
+df.isnull()
+
+df.notnull()
+
+df[df['pre_movie_score'].notnull()]
+
+df.dropna()
+
+df.dropna(subset=['last_name'])
+
+df.fillna('NEW VALUE!')
+
+df['pre_movie_score'].mean()
+
+df['pre_movie_score'].fillna(df['pre_movie_score'].mean())
+
+df.groupby('model_year').mean()
+
+df.groupby('model_year').mean()['mpg']
+
+df.groupby(['model_year','cylinders']).mean() 
+
+df.groupby(['model_year','cylinders']).mean().columns
+
+df.groupby(['model_year','cylinders']).mean().index
+
+df.groupby(['model_year','cylinders']).mean()['mpg']
+
+df.groupby('model_year').describe()
+
+year_cyl.xs(key=70,level='model_year') # 70 models cars
+
+df[df['cylinders'].isin([6,8])].groupby(['model_year', 'cylinders']).mean() # 6 and 8 cylinders are been grouping
+
+year_cyl.sort_index(level='model_year',ascending=False)
+
+df.agg(['std','mean'])
+
+pd.concat([one, two], axis=1) # Second dataframe concates near
+
+pd.concat([one, two], axis=0) #  Second dataframe concates bottom
+
+pd.merge(registrations,logins,how='inner',on='name')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+# code snippet to be executed only once
+setup = '''
+import numpy as np
+import pandas as pd
+df = pd.read_csv('tips.csv')
+def quality(total_bill,tip):
+    if tip/total_bill > 0.25:
+        return "Generous"
+    else:
+        return "Other"
+'''
+
+# code snippet whose execution time is to be measured
+stmt_one = '''
+df['Tip Quality'] = df[['total_bill','tip']].apply(lambda df : quality(df['total_bill'], df['tip']),axis=1)
+'''
+stmt_two = '''
+df['Tip Quality'] = np.vectorize(quality)(df['total_bill'],df['tip'])
+'''
+
+import timeit
+
+timeit.timeit(setup=setup, stmt=stmt_one,number=1000)
+
+timeit.timeit(setup=setup, stmt=stmt_two,number=1000) # This is much faster
