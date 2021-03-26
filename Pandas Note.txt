@@ -146,6 +146,83 @@ pd.concat([one, two], axis=0) #  Second dataframe concates bottom
 
 pd.merge(registrations,logins,how='inner',on='name')
 
+myser = pd.Series(["Nov 3, 1990","2000-01-01",None])
+pd.to_datetime(myser)
+timeser[0].year
+
+style_date = "12--Dec--2000"
+pd.to_datetime(style_date, format="%d--%b--%Y")
+
+custom_date = "12th of Dec 2000"
+pd.to_datetime(custom_date)
+
+sales["DATE"] = pd.to_datetime(sales["DATE"])
+sales["DATE"][0]
+sales["DATE"][0].year
+sales = sales.set_index("DATE")
+sales["DATE"].dt.year
+sales["DATE"].dt.month
+
+df = pd.read_csv("example.csv")
+
+df.to_csv("newfile.csv", index=True) # df.to_csv("newfile.csv", index=False)
+
+url = "https://en.wikipedia.org/wiki/World_population"
+tables = pd.read_html(url)
+len(tables)
+
+tables[1]
+
+tables[1].columns
+
+world_topten = tables[1]
+
+world_topten = world_topten.drop(4, axis=0)
+
+world_topten.to_html("sample_table.html", index=False)
+
+df = pd.read_excel("my_excel_file.xlsx", sheet_name="First_Sheet")
+
+wb = pd.ExcelFile('my_excel_file.xlsx')
+
+wb.sheet_names
+
+our_df.to_excel('example.xlsx', sheet_name="First_Sheet", index=False)
+
+licenses = df[["Company","Product","Licenses"]]
+
+pd.pivot(data=licenses,index="Company",columns="Product",values="Licenses")
+
+pd.pivot_table(df,index="Company", aggfunc="sum")
+
+df.groupby("Company").sum()
+
+df.groupby("Company")["Licenses","Sale Price"].sum()
+
+pd.pivot_table(df,index="Company", aggfunc="sum",values=["Licenses","Sale Price"])
+
+pd.pivot_table(df,index=["Account Manager","Contact"],values=["Sale Price"], aggfunc="sum")
+
+pd.pivot_table(df,index=["Account Manager","Contact"],values=["Sale Price"], columns=["Product"], aggfunc="sum")
+
+pd.pivot_table(df,index=["Account Manager","Contact"],values=["Sale Price"], columns=["Product"], aggfunc="sum", fill_value=0)
+
+pd.pivot_table(df,index=["Account Manager","Contact"],values=["Sale Price"], columns=["Product"], aggfunc=[np.sum], fill_value=0)
+
+d.pivot_table(df,index=["Account Manager","Contact"],values=["Sale Price"], columns=["Product"], aggfunc=[np.sum,np.mean], fill_value=0)
+
+pd.pivot_table(df,index=["Account Manager","Contact","Product"],values=["Sale Price"], aggfunc=[np.sum], fill_value=0, margins=True)
+
+
+
+
+
+
+
+
+
+
+
 
 
 
